@@ -317,6 +317,7 @@ class AddressBook(UserDict):
         weekdays = ['Monday', 'Tuesday', 'Wednesday',
                     'Thursday', 'Friday', 'Saturday', 'Sunday']
         current_year = datetime.now().year
+        current_weekday=datetime.now().weekday
         congratulate = {'Monday': [], 'Tuesday': [],
                         'Wednesday': [], 'Thursday': [], 'Friday': []}
 
@@ -325,7 +326,8 @@ class AddressBook(UserDict):
                 new_birthday = rec.birthday.replace(year=current_year)
                 birthday_weekday = new_birthday.weekday()
                 if self.get_current_week()[0] <= new_birthday < self.get_current_week()[1]:
-                    if birthday_weekday < 5:
+                    if current_weekday < birthday_weekday <= 6:
+                    #if birthday_weekday < 5:
                         congratulate[weekdays[birthday_weekday]].append(
                             rec.name)
                     else:
