@@ -1,7 +1,7 @@
 import requests
 s_city = "Kyiv,UA"
 city_id = 0
-appid = "буквенно-цифровой APPID"
+appid = "84061a2a5ff54b490d63bd38d557b06d"
 try:
     res = requests.get("http://api.openweathermap.org/data/2.5/find",
                  params={'q': s_city, 'type': 'like', 'units': 'metric', 'APPID': appid})
