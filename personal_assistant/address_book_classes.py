@@ -306,10 +306,10 @@ class AddressBook(UserDict):
     def get_current_week(self):
         now = datetime.now()
         current_weekday = now.weekday()
-        if current_weekday < 5:
+        if current_weekday <= 6:
             week_start = now - timedelta(days=2 + current_weekday)
         else:
-            week_start = now - timedelta(days=current_weekday - 5)
+            week_start = now - timedelta(days=current_weekday - 6)
         return [week_start.date(), week_start.date() + timedelta(days=7)]
 
     def congratulate(self):
@@ -319,15 +319,15 @@ class AddressBook(UserDict):
         current_year = datetime.now().year
         current_weekday=datetime.now().weekday
         congratulate = {'Monday': [], 'Tuesday': [],
-                        'Wednesday': [], 'Thursday': [], 'Friday': []}
+                        'Wednesday': [], 'Thursday': [], 'Friday': [], 'Saturday':[]}
 
         for rec in self.data.values():
             if rec.birthday != "":
                 new_birthday = rec.birthday.replace(year=current_year)
                 birthday_weekday = new_birthday.weekday()
-                if self.get_current_week()[0] <= new_birthday < self.get_current_week()[1]:
-                    if current_weekday < birthday_weekday <= 6:
-                    #if birthday_weekday < 5:
+                if self.get_current_week()[0] <= new_birthday <= self.get_current_week()[1]:
+                    if current_weekday() <= birthday_weekday <= 6:
+                    #if birthday_weekday <=6:
                         congratulate[weekdays[birthday_weekday]].append(
                             rec.name)
                     else:
@@ -335,6 +335,7 @@ class AddressBook(UserDict):
         for key, value in congratulate.items():
             if len(value):
                 result.append(f"{key}: {', '.join(value)}")
+                
         return '! Do not forget to congratulate !\n' + '_' * 59 + '\n' + '\n'.join(result) + '\n' + '_' * 59
 
     def show_all_address_book(self):
