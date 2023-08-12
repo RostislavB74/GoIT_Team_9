@@ -2,8 +2,8 @@ import difflib
 import functools
 from rich.console import Console
 from rich.table import Table
-#from personal_assistant.address_book_classes import Record, Name, Phone, Birthday, Email, Address, Note, AddressBook
-from address_book_classes import Record, Name, Phone, Birthday, Email, Address, Note, AddressBook
+# from personal_assistant.address_book_classes import Record, Name, Phone, Birthday, Email, Address, Note, AddressBook  # noqa: E501
+from address_book_classes import Record, Name, Phone, Birthday, Email, Address, Note, AddressBook  # noqa: E501
 from datetime import date, timedelta, datetime
 
 address_book = AddressBook()
@@ -48,7 +48,8 @@ def edit_contacts(*args):
     if name not in address_book.keys():
         return "\nThis name not exist! Use 'show all' to show contacts...\n"
     else:
-        parameter = input('Which parameter to edit(phones, birthday, email, address, note): ').strip()
+        parameter = input(
+            'Which parameter to edit(phones, birthday, email, address, note): ').strip()
         try:
             if parameter not in ("phones", "birthday", "email", "address", "note"):
                 raise ValueError
